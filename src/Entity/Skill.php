@@ -4,10 +4,31 @@ declare(strict_types=1);
 
 namespace Root\Entity;
 
+use Doctrine\ORM\Mapping\Column;
+use Doctrine\ORM\Mapping\Entity;
+use Doctrine\ORM\Mapping\GeneratedValue;
+use Doctrine\ORM\Mapping\Id;
+
+/**
+ * @Entity()
+ */
 class Skill
 {
+    /**
+     * @Id()
+     * @Column(type="integer")
+     * @GeneratedValue()
+     */
     private $id;
+
+    /**
+     * @Column()
+     */
     private $name;
+
+    /**
+     * @Column()
+     */
     private $description;
 
     public function getId(): int

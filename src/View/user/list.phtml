@@ -13,134 +13,29 @@
         <tr>
           <th>Nome</th>
           <th>Email</th>
-          <th>Telefone</th>
-          <th>Status</th>
+          <th>Tipo</th>
           <th>Criado em</th>
           <th>Ações</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>Chiquim</td>
-          <td>a@a.com</td>
-          <td>(85) 9 9999-9999</td>
-          <td><span class="badge badge-success">Ativo</span></td>
-          <td>01/01/2001 09:09</td>
-          <td>
-            <a href="#" class="btn btn-warning">Editar</a>
-            <a href="#" class="btn btn-danger">Excluir</a>
-          </td>
-        </tr>
-        <tr>
-          <td>Chiquim</td>
-          <td>a@a.com</td>
-          <td>(85) 9 9999-9999</td>
-          <td><span class="badge badge-success">Ativo</span></td>
-          <td>01/01/2001 09:09</td>
-          <td>
-            <a href="#" class="btn btn-warning">Editar</a>
-            <a href="#" class="btn btn-danger">Excluir</a>
-          </td>
-        </tr>
-        <tr>
-          <td>Chiquim</td>
-          <td>a@a.com</td>
-          <td>(85) 9 9999-9999</td>
-          <td><span class="badge badge-success">Ativo</span></td>
-          <td>01/01/2001 09:09</td>
-          <td>
-            <a href="#" class="btn btn-warning">Editar</a>
-            <a href="#" class="btn btn-danger">Excluir</a>
-          </td>
-        </tr>
-        <tr>
-          <td>Chiquim</td>
-          <td>a@a.com</td>
-          <td>(85) 9 9999-9999</td>
-          <td><span class="badge badge-success">Ativo</span></td>
-          <td>01/01/2001 09:09</td>
-          <td>
-            <a href="#" class="btn btn-warning">Editar</a>
-            <a href="#" class="btn btn-danger">Excluir</a>
-          </td>
-        </tr>
-        <tr>
-          <td>Chiquim</td>
-          <td>a@a.com</td>
-          <td>(85) 9 9999-9999</td>
-          <td><span class="badge badge-success">Ativo</span></td>
-          <td>01/01/2001 09:09</td>
-          <td>
-            <a href="#" class="btn btn-warning">Editar</a>
-            <a href="#" class="btn btn-danger">Excluir</a>
-          </td>
-        </tr>
-        <tr>
-          <td>Chiquim</td>
-          <td>a@a.com</td>
-          <td>(85) 9 9999-9999</td>
-          <td><span class="badge badge-success">Ativo</span></td>
-          <td>01/01/2001 09:09</td>
-          <td>
-            <a href="#" class="btn btn-warning">Editar</a>
-            <a href="#" class="btn btn-danger">Excluir</a>
-          </td>
-        </tr>
-        <tr>
-          <td>Chiquim</td>
-          <td>a@a.com</td>
-          <td>(85) 9 9999-9999</td>
-          <td><span class="badge badge-success">Ativo</span></td>
-          <td>01/01/2001 09:09</td>
-          <td>
-            <a href="#" class="btn btn-warning">Editar</a>
-            <a href="#" class="btn btn-danger">Excluir</a>
-          </td>
-        </tr>
-        <tr>
-          <td>Chiquim</td>
-          <td>a@a.com</td>
-          <td>(85) 9 9999-9999</td>
-          <td><span class="badge badge-success">Ativo</span></td>
-          <td>01/01/2001 09:09</td>
-          <td>
-            <a href="#" class="btn btn-warning">Editar</a>
-            <a href="#" class="btn btn-danger">Excluir</a>
-          </td>
-        </tr>
-        <tr>
-          <td>Chiquim</td>
-          <td>a@a.com</td>
-          <td>(85) 9 9999-9999</td>
-          <td><span class="badge badge-success">Ativo</span></td>
-          <td>01/01/2001 09:09</td>
-          <td>
-            <a href="#" class="btn btn-warning">Editar</a>
-            <a href="#" class="btn btn-danger">Excluir</a>
-          </td>
-        </tr>
-        <tr>
-          <td>Chiquim</td>
-          <td>a@a.com</td>
-          <td>(85) 9 9999-9999</td>
-          <td><span class="badge badge-success">Ativo</span></td>
-          <td>01/01/2001 09:09</td>
-          <td>
-            <a href="#" class="btn btn-warning">Editar</a>
-            <a href="#" class="btn btn-danger">Excluir</a>
-          </td>
-        </tr>
-        <tr>
-          <td>Chiquim</td>
-          <td>a@a.com</td>
-          <td>(85) 9 9999-9999</td>
-          <td><span class="badge badge-success">Ativo</span></td>
-          <td>01/01/2001 09:09</td>
-          <td>
-            <a href="#" class="btn btn-warning">Editar</a>
-            <a href="#" class="btn btn-danger">Excluir</a>
-          </td>
-        </tr>
+      <?php
+        foreach ($data as $user) {
+            echo "
+            <tr>
+                <td>{$user->getName()}</td>
+                <td>{$user->getEmail()}</td>
+                <td>{$user->getType()}</td>
+                <td>---</td>
+                <td>
+                <a href='/excluir-usuario?id={$user->getId()}' class='btn btn-danger'>
+                    Excluir    
+                </a>
+                </td>
+            </tr>
+            ";
+        }
+      ?>
       </tbody>
     </table>
   </div>

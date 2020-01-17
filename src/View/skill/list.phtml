@@ -19,48 +19,17 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>PHP</td>
-          <td>Sabe procurar em PHP</td>
-          <td>
-            <a href="#" class="btn btn-danger">Excluir</a>
-          </td>
-        </tr>
-        <tr>
-          <td>PHP</td>
-          <td>Sabe procurar em PHP</td>
-          <td>
-            <a href="#" class="btn btn-danger">Excluir</a>
-          </td>
-        </tr>
-        <tr>
-          <td>PHP</td>
-          <td>Sabe procurar em PHP</td>
-          <td>
-            <a href="#" class="btn btn-danger">Excluir</a>
-          </td>
-        </tr>
-        <tr>
-          <td>PHP</td>
-          <td>Sabe procurar em PHP</td>
-          <td>
-            <a href="#" class="btn btn-danger">Excluir</a>
-          </td>
-        </tr>
-        <tr>
-          <td>PHP</td>
-          <td>Sabe procurar em PHP</td>
-          <td>
-            <a href="#" class="btn btn-danger">Excluir</a>
-          </td>
-        </tr>
-        <tr>
-          <td>PHP</td>
-          <td>Sabe procurar em PHP</td>
-          <td>
-            <a href="#" class="btn btn-danger">Excluir</a>
-          </td>
-        </tr>
+        <?php
+            foreach ($data as $skill) {
+                echo "
+                    <tr>
+                        <td>{$skill->getName()}</td>
+                        <td>{$skill->getDescription()}</td>
+                        <td><a href='' class='btn btn-danger'>Excluir</a></td>
+                    </tr>
+                ";
+            }
+        ?>
       </tbody>
     </table>
   </div>

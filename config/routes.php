@@ -18,6 +18,7 @@ return [
     '/login' => mountRoute(MainController::class, 'login'),
     '/usuarios' => mountRoute(UserController::class, 'list'),
     '/novo-usuario' => mountRoute(UserController::class, 'add'),
+    '/excluir-usuario' => mountRoute(UserController::class, 'remove'),
     '/habilidades' => mountRoute(SkillController::class, 'list'),
     '/nova-habilidade' => mountRoute(SkillController::class, 'add'),
     '/admin' => mountRoute(AdminController::class, 'dashboard'),

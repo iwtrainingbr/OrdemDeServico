@@ -25,10 +25,6 @@ class UserValidator
       $errors[] = 'Senha inválida, precisa de 8 digitos no minimo.';
     }
 
-    if (!isset($_POST['phone']) || strlen(trim($_POST['phone'])) < 8) {
-      $errors[] = 'Telefone inválido, precisa de 8 digitos no minimo.';
-    }
-
     if (!empty($errors)) {
       $_SESSION['errors'] = $errors;
 

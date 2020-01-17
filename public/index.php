@@ -1,12 +1,15 @@
 <?php
 
+use Root\Controller\MainController;
+
 ini_set('display_errors', 1);
 
-$url = $_SERVER['REQUEST_URI'];
+$url = explode('?', $_SERVER['REQUEST_URI'])[0];
 
 session_start();
 
 include '../vendor/autoload.php';
+include '../config/database.php';
 
 $routes = include_once '../config/routes.php';
 
