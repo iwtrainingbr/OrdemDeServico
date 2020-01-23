@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Root\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\GeneratedValue;
@@ -40,7 +41,12 @@ class User
      * @Column()
      */
     private $type;
+
+    /**
+     * @Column()
+     */
     private $status;
+
     private $createdAt;
     private $updatedAt;
     private $lastLogin;

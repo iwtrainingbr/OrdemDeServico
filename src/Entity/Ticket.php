@@ -4,17 +4,48 @@ declare(strict_types=1);
 
 namespace Root\Entity;
 
+use Doctrine\ORM\Mapping\Entity;
+use Doctrine\ORM\Mapping\Column;
+use Doctrine\ORM\Mapping\Id;
+use Doctrine\ORM\Mapping\GeneratedValue;
+
+/**
+ * @Entity
+ */
 class Ticket
 {
+    /**
+     * @Id()
+     * @Column(type="integer")
+     * @GeneratedValue()
+     */
     private $id;
     private $attendant;
     private $expert;
     private $client;
+
+    /**
+     * @Column()
+     */
     private $status;
+
+    /**
+     * @Column()
+     */
     private $title;
+
+    /**
+     * @Column()
+     */
     private $description;
+
+    /**
+     * @Column(type="datetime")
+     */
     private $deadline;
+
     private $createdAt;
+
     private $updatedAt;
 
     public function getId(): int

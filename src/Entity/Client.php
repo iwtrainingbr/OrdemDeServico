@@ -4,12 +4,38 @@ declare(strict_types=1);
 
 namespace Root\Entity;
 
+use Doctrine\ORM\Mapping\Entity;
+use Doctrine\ORM\Mapping\Id;
+use Doctrine\ORM\Mapping\Column;
+use Doctrine\ORM\Mapping\GeneratedValue;
+
+/**
+ * @Entity()
+ */
 class Client
 {
+    /**
+     * @Id()
+     * @Column(type="integer")
+     * @GeneratedValue()
+     */
     private $id;
+
+    /**
+     * @Column()
+     */
     private $name;
+
+    /**
+     * @Column()
+     */
     private $email;
+
+    /**
+     * @Column()
+     */
     private $phone;
+
     private $createdAt;
 
     public function getId(): int

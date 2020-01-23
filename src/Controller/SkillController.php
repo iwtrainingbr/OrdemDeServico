@@ -6,6 +6,7 @@ namespace Root\Controller;
 
 use Root\Adapter\Connection;
 use Root\Entity\Skill;
+use Root\Entity\User;
 use Root\Validator\SkillValidator;
 
 class SkillController extends AbstractController
@@ -42,5 +43,21 @@ class SkillController extends AbstractController
         $skills = $this->entityManager->getRepository(Skill::class)->findAll();
 
         $this->render('skill/list', $skills);
+    }
+
+    public function remove(): void
+    {
+        $skill = $this->entityManager->getRepository(Skill::class)->find($_GET['id']);
+
+        if (!$skill) {
+            $_SESSION['errors'] = ['Habilidade não encontrado'];
+            header('location: /habilidades');
+            return;
+        }
+
+        $this->entityManager->remove($skill);
+        $this->entityManager->flush();
+
+        header('location: /habilidades');
     }
 }
