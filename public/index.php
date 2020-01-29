@@ -8,6 +8,8 @@ $url = explode('?', $_SERVER['REQUEST_URI'])[0];
 
 session_start();
 
+date_default_timezone_set('America/Fortaleza');
+
 include '../vendor/autoload.php';
 include '../config/database.php';
 

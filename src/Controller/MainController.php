@@ -8,12 +8,12 @@ class MainController extends AbstractController
 {
     public function index(): void
     {
-        echo '<h1>Página Inicial</h1>';
+        header('location: /admin');
     }
 
     public function notFound(): void
     {
-        echo '<h1>Página não encontrada</h1>';
+        $this->render('main/error-not-found');
     }
 
     public function login(): void

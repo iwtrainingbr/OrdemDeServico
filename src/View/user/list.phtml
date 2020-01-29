@@ -14,6 +14,8 @@
           <th>Nome</th>
           <th>Email</th>
           <th>Tipo</th>
+          <th>Status</th>
+          <th>Habilidades</th>
           <th>Criado em</th>
           <th>Ações</th>
         </tr>
@@ -21,15 +23,33 @@
       <tbody>
       <?php
         foreach ($data as $user) {
+            $status = "<span class='badge badge-success'>Ativo</span>";
+
+            if (!$user->isStatus()) {
+                $status = "<span class='badge badge-danger'>Inativo</span>";
+            }
+
+            $skills = [];
+            foreach ($user->getSkills() as $skill) {
+                $skills[] = "<span class='badge badge-info'>{$skill->getName()}</span>";
+            }
+
+            $skills = implode(' ', $skills);
+
             echo "
             <tr>
                 <td>{$user->getName()}</td>
                 <td>{$user->getEmail()}</td>
                 <td>{$user->getType()}</td>
-                <td>---</td>
+                <td>{$status}</td>
+                <td>{$skills}</td>
+                <td>{$user->getCreatedAt()->format('d/m/Y H:i:s')}</td>
                 <td>
                 <a href='/excluir-usuario?id={$user->getId()}' class='btn btn-danger'>
                     Excluir    
+                </a>
+                <a href='/editar-usuario?id={$user->getId()}' class='btn btn-warning'>
+                    Editar    
                 </a>
                 </td>
             </tr>

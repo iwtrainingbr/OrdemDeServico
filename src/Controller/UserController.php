@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Root\Controller;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Root\Adapter\Connection;
+use Root\Entity\Skill;
 use Root\Entity\User;
 use Root\Validator\UserValidator;
 
@@ -83,5 +85,60 @@ class UserController extends AbstractController
         $this->entityManager->flush();
 
         header('location: /usuarios');
+    }
+
+    public function edit(): void
+    {
+        $user = $this->entityManager
+            ->getRepository(User::class)
+            ->find($_GET['id']);
+
+        if (!$user) {
+            $_SESSION['errors'] = ['Usuário não encontrado'];
+            $this->list();
+            return;
+        }
+
+        if ($_POST) {
+            $skills = new ArrayCollection();
+
+            foreach ($_POST['skills'] as $skillId) {
+                $skill = $this->entityManager
+                    ->getRepository(Skill::class)
+                    ->find($skillId);
+
+                $skills->add($skill);
+            }
+
+            $user->setSkills($skills);
+
+            $user->setType($_POST['type']);
+            $user->setName($_POST['name']);
+            $user->setEmail($_POST['email']);
+            $user->setStatus(
+                $_POST['status'] === 'ativo'?true:false
+            );
+
+            if ($_POST['password']) {
+                $user->setPassword(
+                    password_hash($_POST['password'], PASSWORD_ARGON2I)
+                );
+            }
+
+            $this->entityManager->persist($user);
+            $this->entityManager->flush();
+            header('location: /usuarios');
+            return;
+        }
+
+        $skills = $this
+            ->entityManager
+            ->getRepository(Skill::class)
+            ->findAll();
+
+        $this->render('user/edit', [
+            'user' => $user,
+            'skills' => $skills,
+        ]);
     }
 }

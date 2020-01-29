@@ -1,0 +1,62 @@
+<section class="row mt-5">
+    <div class="col-md-6"></div>
+
+    <div class="col-md-6 card card-body">
+        <h2>Editar Usuário (<?=$data['user']->getName()?>)</h2>
+
+        <hr>
+
+        <form action="" method="post">
+            <label for="name">Nome: </label>
+            <input value="<?=$data['user']->getName()?>" class="form-control" name="name" id="name"  placeholder="Nome">
+            <br>
+
+            <label for="email">Email: </label>
+            <input value="<?=$data['user']->getEmail()?>" class="form-control" name="email" id="email" type="email" placeholder="Email">
+            <br>
+
+            <label for="password">Senha: </label>
+            <input class="form-control" name="password" id="password" type="password" placeholder="Senha">
+            <br>
+
+            <div class="form-check form-check-inline">
+                <input <?=$data['user']->isStatus()?'checked':''?> class="form-check-input" type="radio" name="status" id="inlineRadio1" value="ativo">
+                <label class="form-check-label" for="inlineRadio1">Ativo</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input <?=!$data['user']->isStatus()?'checked':''?> class="form-check-input" type="radio" name="status" id="inlineRadio2" value="inativo">
+                <label class="form-check-label" for="inlineRadio2">Inativo</label>
+            </div>
+
+            <br>
+            <label for="type" class="mt-3">Tipo: </label>
+            <select name="type" id="type" class="form-control">
+                <option>Atendente</option>
+                <option>Técnico</option>
+                <option>Admin</option>
+                <optgroup label="Atual">
+                    <option selected><?=$data['user']->getType()?></option>
+                </optgroup>
+            </select>
+
+            <br>
+
+            <label>Habilidades</label>
+            <br>
+            <?php
+                foreach ($data['skills'] as $skill) {
+                    $id = $skill->getId();
+
+                    echo "
+                        <div class='form-check form-check-inline'>
+                          <input class='form-check-input' name='skills[]' type='checkbox' id='skill{$id}' value='{$id}'>
+                          <label class='form-check-label' for='skill{$id}'>{$skill->getName()}</label>
+                        </div>
+                    ";
+                }
+            ?>
+
+            <button class="mt-3 btn btn-primary btn-block">ENVIAR</button>
+        </form>
+    </div>
+</section>

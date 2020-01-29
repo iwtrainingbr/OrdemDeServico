@@ -4,14 +4,24 @@ declare(strict_types=1);
 
 namespace Root\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\GeneratedValue;
 use Doctrine\ORM\Mapping\Id;
+use Doctrine\ORM\Mapping\JoinColumn;
+use Doctrine\ORM\Mapping\ManyToMany;
+use Doctrine\ORM\Mapping\ManyToOne;
+use Doctrine\ORM\Mapping\OneToMany;
+use Doctrine\ORM\Mapping\PrePersist;
+use Doctrine\ORM\Mapping\PreUpdate;
+use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
 
 /**
  * @Entity
+ * @HasLifecycleCallbacks
  */
 class User
 {
@@ -43,13 +53,52 @@ class User
     private $type;
 
     /**
-     * @Column()
+     * @Column(type="boolean")
      */
     private $status;
 
+    /**
+     * @Column(type="datetime")
+     */
     private $createdAt;
+
+    /**
+     * @Column(type="datetime", nullable=true)
+     */
     private $updatedAt;
+
+    /**
+     * @Column(type="datetime", nullable=true)
+     */
     private $lastLogin;
+
+    /**
+     * @ManyToMany(targetEntity="Skill")
+     * @JoinColumn(name="skill_id", referencedColumnName="id")
+     */
+    private $skills;
+
+    public function __construct()
+    {
+        $this->status = true;
+        $this->skills = new ArrayCollection();
+    }
+
+    /**
+     * @PrePersist()
+     */
+    public function prePersist(): void
+    {
+        $this->createdAt = new \DateTime();
+    }
+
+    /**
+     * @PreUpdate()
+     */
+    public function preUpdate(): void
+    {
+        $this->updatedAt = new \DateTime();
+    }
 
     public function getId(): int
     {
@@ -139,5 +188,15 @@ class User
     public function setLastLogin(\DateTime $lastLogin): void
     {
         $this->lastLogin = $lastLogin;
+    }
+
+    public function getSkills(): ?Collection
+    {
+        return $this->skills;
+    }
+
+    public function setSkills(Collection $skills): void
+    {
+        $this->skills = $skills;
     }
 }
