@@ -17,6 +17,7 @@
           <th>Status</th>
           <th>Habilidades</th>
           <th>Criado em</th>
+          <th>Atualizado em</th>
           <th>Ações</th>
         </tr>
       </thead>
@@ -36,6 +37,12 @@
 
             $skills = implode(' ', $skills);
 
+            $updatedAt = '---';
+
+            if ($user->getUpdatedAt()) {
+                $updatedAt = $user->getUpdatedAt()->format('d/m/Y H:i:s');
+            }
+
             echo "
             <tr>
                 <td>{$user->getName()}</td>
@@ -44,6 +51,7 @@
                 <td>{$status}</td>
                 <td>{$skills}</td>
                 <td>{$user->getCreatedAt()->format('d/m/Y H:i:s')}</td>
+                <td>{$updatedAt}</td>
                 <td>
                 <a href='/excluir-usuario?id={$user->getId()}' class='btn btn-danger'>
                     Excluir    
