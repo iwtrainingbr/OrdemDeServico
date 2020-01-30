@@ -25,7 +25,10 @@
                     <tr>
                         <td>{$skill->getName()}</td>
                         <td>{$skill->getDescription()}</td>
-                        <td><a href='/excluir-habilidade?id={$skill->getId()}' class='btn btn-danger'>Excluir</a></td>
+                        <td>
+                            <a href='/excluir-habilidade?id={$skill->getId()}' class='btn btn-danger'>Excluir</a>
+                            <a href='/editar-habilidade?id={$skill->getId()}' class='btn btn-warning'>Editar</a>
+                        </td>
                     </tr>
                 ";
             }

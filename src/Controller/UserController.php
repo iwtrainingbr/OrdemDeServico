@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Root\Controller;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Root\Adapter\Connection;
 use Root\Entity\Skill;
 use Root\Entity\User;
@@ -100,17 +99,16 @@ class UserController extends AbstractController
         }
 
         if ($_POST) {
-            $skills = new ArrayCollection();
+            $user->getSkills()->clear();
 
             foreach ($_POST['skills'] as $skillId) {
                 $skill = $this->entityManager
                     ->getRepository(Skill::class)
                     ->find($skillId);
 
-                $skills->add($skill);
+                $user->getSkills()->add($skill);
             }
 
-            $user->setSkills($skills);
 
             $user->setType($_POST['type']);
             $user->setName($_POST['name']);

@@ -6,7 +6,6 @@ namespace Root\Controller;
 
 use Root\Adapter\Connection;
 use Root\Entity\Skill;
-use Root\Entity\User;
 use Root\Validator\SkillValidator;
 
 class SkillController extends AbstractController
@@ -59,5 +58,27 @@ class SkillController extends AbstractController
         $this->entityManager->flush();
 
         header('location: /habilidades');
+    }
+
+    public function edit(): void
+    {
+        $skill = $this->entityManager
+            ->getRepository(Skill::class)
+            ->find($_GET['id']);
+
+        if ($_POST) {
+            $skill->setName($_POST['name']);
+            $skill->setDescription($_POST['description']);
+
+            $this->entityManager->persist($skill);
+            $this->entityManager->flush();
+
+            header('location: /habilidades');
+            exit;
+        }
+
+        $this->render('skill/edit', [
+            'skill' => $skill,
+        ]);
     }
 }

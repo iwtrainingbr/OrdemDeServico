@@ -25,6 +25,7 @@ return [
     '/habilidades' => mountRoute(SkillController::class, 'list'),
     '/nova-habilidade' => mountRoute(SkillController::class, 'add'),
     '/excluir-habilidade' => mountRoute(SkillController::class, 'remove'),
+    '/editar-habilidade' => mountRoute(SkillController::class, 'edit'),
 
     '/admin' => mountRoute(AdminController::class, 'dashboard'),
     '/perfil' => mountRoute(UserController::class, 'profile'),
