@@ -21,6 +21,7 @@ return [
     '/novo-usuario' => mountRoute(UserController::class, 'add'),
     '/excluir-usuario' => mountRoute(UserController::class, 'remove'),
     '/editar-usuario' => mountRoute(UserController::class, 'edit'),
+    '/usuarios/pdf' => mountRoute(UserController::class, 'pdf'),
 
     '/habilidades' => mountRoute(SkillController::class, 'list'),
     '/nova-habilidade' => mountRoute(SkillController::class, 'add'),

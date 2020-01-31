@@ -67,36 +67,25 @@
             </tr>
           </thead>
           <tbody>
-              <tr>
-                <td>Chiquim da Silva</td>
-                <td>31/12/2019 09:34:12</td>
-                <td><span class="badge badge-success">Ativo</span></td>
-              </tr>
-              <tr>
-                <td>Chiquim da Silva</td>
-                <td>31/12/2019 09:34:12</td>
-                <td><span class="badge badge-danger">Inativo</span></td>
-              </tr>
-              <tr>
-                <td>Chiquim da Silva</td>
-                <td>31/12/2019 09:34:12</td>
-                <td><span class="badge badge-success">Ativo</span></td>
-              </tr>
-              <tr>
-                <td>Chiquim da Silva</td>
-                <td>31/12/2019 09:34:12</td>
-                <td><span class="badge badge-danger">Inativo</span></td>
-              </tr>
-              <tr>
-                <td>Chiquim da Silva</td>
-                <td>31/12/2019 09:34:12</td>
-                <td><span class="badge badge-success">Ativo</span></td>
-              </tr>
-              <tr>
-                <td>Chiquim da Silva</td>
-                <td>31/12/2019 09:34:12</td>
-                <td><span class="badge badge-danger">Inativo</span></td>
-              </tr>
+            <?php
+                foreach ($data['last_users'] as $user) {
+                    $createdAt = new \DateTime($user['createdAt']);
+
+                    $status = '<span class="badge badge-success">Ativo</span>';
+
+                    if (!$user['status']) {
+                        $status = '<span class="badge badge-danger">Inativo</span>';
+                    }
+
+                    echo "
+                      <tr>
+                        <td>{$user['name']}</td>
+                        <td>{$createdAt->format('d/m/Y H:i:s')}</td>
+                        <td>{$status}</td>
+                      </tr>
+                    ";
+                }
+            ?>
           </tbody>
       </table>
     </div>

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Root\Controller;
 
+use Dompdf\Dompdf;
 use Root\Adapter\Connection;
 use Root\Entity\Skill;
 use Root\Entity\User;
@@ -137,6 +138,58 @@ class UserController extends AbstractController
         $this->render('user/edit', [
             'user' => $user,
             'skills' => $skills,
+        ]);
+    }
+
+    public function pdf(): void
+    {
+        $users = $this->entityManager->getRepository(User::class)->findAll();
+
+        $tbody = '';
+        foreach ($users as $user) {
+            $tbody .= "
+                <tr>
+                    <td>{$user->getName()}</td>
+                    <td>{$user->getEmail()}</td>
+                    <td>{$user->getCreatedAt()->format('d/m/Y H:i:s')}</td>
+                </tr>
+            ";
+        }
+
+        $today = date('d/m/Y H:i:s');
+
+        $html = "
+            <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css'>
+            
+            <h1>Relatório de Usuários</h1>
+            <p>
+                <strong>Gerado em: </strong>{$today}
+            </p>
+                
+            <hr>
+            
+            <table class='table table-striped'>
+                <thead class='thead-dark'>
+                    <th>Nome</th>
+                    <th>Email</th>
+                    <th>Cadastrado em</th>
+                </thead>
+                <tbody>
+                    <tr></tr>
+                    {$tbody}
+                </tbody>
+            </table>
+        ";
+
+        $dompdf = new Dompdf();
+        $dompdf->loadHtml($html);
+
+        $dompdf->render();
+
+        $filename = 'relatorios-usuarios-'.date('Ymd-His').'.pdf';
+
+        $dompdf->stream($filename, [
+            'Attachment' => 0,
         ]);
     }
 }

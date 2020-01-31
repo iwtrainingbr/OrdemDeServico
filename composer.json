@@ -1,6 +1,7 @@
 {
   "require": {
-    "doctrine/orm": "^2.7"
+    "doctrine/orm": "^2.7",
+    "dompdf/dompdf": "^0.8.4"
   },
   "autoload": {
     "psr-4": {
