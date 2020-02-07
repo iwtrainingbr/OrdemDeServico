@@ -6,6 +6,7 @@ namespace Root\Controller;
 
 use Root\Adapter\Connection;
 use Root\Entity\Skill;
+use Root\Security\PermissionSecurity;
 use Root\Validator\SkillValidator;
 
 class SkillController extends AbstractController
@@ -19,6 +20,8 @@ class SkillController extends AbstractController
 
     public function add(): void
     {
+        PermissionSecurity::userHasPermission('Admin');
+
         if (!$_POST) {
           $this->render('skill/add');
           return;
@@ -39,6 +42,8 @@ class SkillController extends AbstractController
 
     public function list(): void
     {
+        PermissionSecurity::userHasPermission('Admin');
+
         $skills = $this->entityManager->getRepository(Skill::class)->findAll();
 
         $this->render('skill/list', $skills);
@@ -46,6 +51,8 @@ class SkillController extends AbstractController
 
     public function remove(): void
     {
+        PermissionSecurity::userHasPermission('Admin');
+
         $skill = $this->entityManager->getRepository(Skill::class)->find($_GET['id']);
 
         if (!$skill) {
@@ -62,6 +69,8 @@ class SkillController extends AbstractController
 
     public function edit(): void
     {
+        PermissionSecurity::userHasPermission('Admin');
+
         $skill = $this->entityManager
             ->getRepository(Skill::class)
             ->find($_GET['id']);

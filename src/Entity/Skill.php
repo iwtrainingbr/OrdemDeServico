@@ -60,4 +60,9 @@ class Skill
     {
         $this->description = $description;
     }
+
+    public function getValues(): array
+    {
+        return get_object_vars($this);
+    }
 }

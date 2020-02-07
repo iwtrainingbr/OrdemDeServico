@@ -7,6 +7,7 @@ namespace Root\Controller;
 use Doctrine\ORM\Query\ResultSetMapping;
 use Root\Adapter\Connection;
 use Root\Entity\User;
+use Root\Security\PermissionSecurity;
 
 class AdminController extends AbstractController
 {
@@ -19,6 +20,8 @@ class AdminController extends AbstractController
 
     public function dashboard(): void
     {
+        PermissionSecurity::userHasPermission('Admin');
+
         $repository = $this->entityManager->getRepository(User::class);
 
         /*$rsm = new ResultSetMapping();

@@ -1,5 +1,6 @@
 <?php
 
+use Root\Controller\Api\SkillApiController;
 use Root\Controller\MainController;
 use Root\Controller\UserController;
 use Root\Controller\SkillController;
@@ -16,6 +17,7 @@ function mountRoute(string $controller, string $method): array
 return [
     '/' => mountRoute(MainController::class, 'index'),
     '/login' => mountRoute(MainController::class, 'login'),
+    '/logout' => mountRoute(MainController::class, 'logout'),
 
     '/usuarios' => mountRoute(UserController::class, 'list'),
     '/novo-usuario' => mountRoute(UserController::class, 'add'),
@@ -30,4 +32,8 @@ return [
 
     '/admin' => mountRoute(AdminController::class, 'dashboard'),
     '/perfil' => mountRoute(UserController::class, 'profile'),
+
+
+    //API
+    '/api/habilidade' => mountRoute(SkillApiController::class, 'main'),
 ];

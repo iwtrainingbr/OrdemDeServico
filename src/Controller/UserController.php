@@ -8,6 +8,7 @@ use Dompdf\Dompdf;
 use Root\Adapter\Connection;
 use Root\Entity\Skill;
 use Root\Entity\User;
+use Root\Security\PermissionSecurity;
 use Root\Validator\UserValidator;
 
 class UserController extends AbstractController
@@ -21,6 +22,8 @@ class UserController extends AbstractController
 
     public function add(): void
     {
+        PermissionSecurity::userHasPermission('Admin');
+
         if (!$_POST) {
           $this->render('user/add');
           return;
@@ -61,6 +64,8 @@ class UserController extends AbstractController
 
     public function list(): void
     {
+        PermissionSecurity::userHasPermission('Admin');
+
         $users = $this->entityManager->getRepository(User::class)->findAll();
 
         $this->render('user/list', $users);
@@ -73,6 +78,8 @@ class UserController extends AbstractController
 
     public function remove(): void
     {
+        PermissionSecurity::userHasPermission('Admin');
+
         $user = $this->entityManager->getRepository(User::class)->find($_GET['id']);
 
         if (!$user) {
@@ -89,6 +96,8 @@ class UserController extends AbstractController
 
     public function edit(): void
     {
+        PermissionSecurity::userHasPermission('Admin');
+
         $user = $this->entityManager
             ->getRepository(User::class)
             ->find($_GET['id']);
@@ -143,6 +152,8 @@ class UserController extends AbstractController
 
     public function pdf(): void
     {
+        PermissionSecurity::userHasPermission('Admin');
+
         $users = $this->entityManager->getRepository(User::class)->findAll();
 
         $tbody = '';
