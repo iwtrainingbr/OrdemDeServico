@@ -3,6 +3,8 @@
 ## Instalação
 `php composer.phar install`
 
+## Crie um banco de dados
+
 ## Configuração do Banco
 Alterar o arquivo `/config/database.php`
 
